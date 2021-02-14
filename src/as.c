@@ -29,8 +29,17 @@ int main(int argc, char *argv[])
     FILE    *fopen();
     int j = 0;
 
-    if(argc < 2){
-        printf("Usage: %s [files]\n",argv[j]);
+	if(argc < 2 || *argv[1] == '-'){
+		printf("Usage: %s file [more_files] [- options]\n",argv[0]);
+		printf("where options is one or more (separated  by spaces) of:\n");
+		printf("  l   - Generate output listing (sent to stdout)\n");
+		printf("  nol - Do not generate output listing\n");
+		printf("  c   - Show instruction cycle counts in listing\n");
+		printf("  noc - Do not show instruction cycle counts in listing\n");
+		printf("  s   - Generate Motorola S19 file\n");
+		printf("  cre - Generate cross-reference table\n");
+		printf("\n");
+		printf("Example use: %s test.asm - l c\n", argv[0]);
         exit(1);
         }
       Argv = argv;
