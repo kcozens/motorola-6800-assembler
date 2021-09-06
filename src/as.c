@@ -186,7 +186,6 @@ int parse_line(void)
 {
     register char *ptrfrm = Line;
     register char *ptrto = Label;
-    char    *skip_white();
 
 	if( *ptrfrm == '*' || *ptrfrm == ';' || *ptrfrm == '\n' )
         return(0);  /* a comment line */
@@ -198,8 +197,21 @@ int parse_line(void)
 
     ptrfrm = skip_white(ptrfrm);
 
+	/* Handle comment after a label or comment line */
+	/* where the comment did not start in column 1. */
+	if( *ptrfrm == '*' || *ptrfrm == ';' || *ptrfrm == '\n' )
+	{
+		*Op = EOS;
+		*Operand = EOS;
+
+		if (*Label == EOS)
+			return(0);	/* a comment line */
+
+		return(1);		/* label only line */
+	}
+
     ptrto = Op;
-    while( delim(*ptrfrm) == NO)
+	while( delim(*ptrfrm) == NO )
         *ptrto++ = mapdn(*ptrfrm++);
     *ptrto = EOS;
 
@@ -244,4 +256,3 @@ void process(void)
         if(Cflag)Ctotal += Cycles;
         }
 }
-
