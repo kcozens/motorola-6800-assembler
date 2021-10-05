@@ -43,7 +43,7 @@ struct oper pseudo[] = {
 
 int sizeof_pseudo(void)
 {
-	return sizeof(pseudo);
+    return sizeof(pseudo);
 }
 
 /*
@@ -164,7 +164,7 @@ void do_pseudo(int op /* which op */)
                         P_force=0;
                         N_page = 1;
                         if (Pass == 2 )
-                         if (Lflag)  
+                         if (Lflag)
                           {
                            printf ("\f");
                            printf ("%-10s",Argv[Cfn]);

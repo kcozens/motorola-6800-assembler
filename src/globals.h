@@ -51,7 +51,7 @@ extern int     Page_num;           /* page number */
 extern int     CREflag;            /* cross reference table flag */
 
 extern struct  nlist *root;            /* root node of the tree */
-  
+
 extern FILE    *Objfil;             /* object file's file descriptor*/
 extern char    Obj_name[];
 

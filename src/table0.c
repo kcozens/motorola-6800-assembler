@@ -119,6 +119,6 @@ struct oper table[] = {
 
 int sizeof_table(void)
 {
-	return sizeof(table);
+    return sizeof(table);
 }
 

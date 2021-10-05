@@ -17,43 +17,43 @@
 int install(char *str, int val)
 {
         struct link *lp;
-	struct nlist *np,*p,*backp;
-	struct nlist *lookup();
-	int     i;
+    struct nlist *np,*p,*backp;
+    struct nlist *lookup();
+    int     i;
 
-	if( !alpha(*str) ){
-		error("Illegal Symbol Name");
-		return(NO);
-		}
-	if( (np = lookup(str)) != NULL ){
-		if( Pass==2 ){
-			if( np->def == val )
-				return(YES);
-			else{
-				error("Phasing Error");
-				return(NO);
-				}
-			}
-		error("Symbol Redefined");
-		return(NO);
-		}
-	/* enter new symbol */
+    if( !alpha(*str) ){
+        error("Illegal Symbol Name");
+        return(NO);
+        }
+    if( (np = lookup(str)) != NULL ){
+        if( Pass==2 ){
+            if( np->def == val )
+                return(YES);
+            else{
+                error("Phasing Error");
+                return(NO);
+                }
+            }
+        error("Symbol Redefined");
+        return(NO);
+        }
+    /* enter new symbol */
 #ifdef DEBUG
-	printf("Installing %s as %d\n",str,val);
+    printf("Installing %s as %d\n",str,val);
 #endif
-	np = (struct nlist *) alloc(sizeof(struct nlist));
-	if( np == (struct nlist *)ERR ){
-		error("Symbol table full");
-		return(NO);
-		}
-	np->name = alloc(strlen(str)+1);
-	if( np->name == (char *)ERR ){
-		error("Symbol table full");
-		return(NO);
-		}
-	strcpy(np->name,str);
-	np->def = val;
-	np->Lnext = NULL;  
+    np = (struct nlist *) alloc(sizeof(struct nlist));
+    if( np == (struct nlist *)ERR ){
+        error("Symbol table full");
+        return(NO);
+        }
+    np->name = alloc(strlen(str)+1);
+    if( np->name == (char *)ERR ){
+        error("Symbol table full");
+        return(NO);
+        }
+    strcpy(np->name,str);
+    np->def = val;
+    np->Lnext = NULL;
         np->Rnext = NULL;
            lp = (struct link *) alloc(sizeof(struct link));
            np->L_list = lp;
@@ -61,7 +61,7 @@ int install(char *str, int val)
            lp->next = NULL;
         p = root;
           backp = NULL;
-           while (p != NULL) 
+           while (p != NULL)
             {
               backp = p;
               i = strcmp (str,p->name);
@@ -74,7 +74,7 @@ int install(char *str, int val)
              else if (strcmp(str,backp->name)<0)
                   backp->Lnext = np;
                  else backp->Rnext = np;
-          return (YES);  
+          return (YES);
 }
 
 /*
@@ -82,8 +82,8 @@ int install(char *str, int val)
  */
 struct nlist *lookup(char *name)
 {
-	struct nlist *np;
-	int     i;
+    struct nlist *np;
+    int     i;
 
         np = root;
          while (np != NULL)
@@ -101,7 +101,7 @@ struct nlist *lookup(char *name)
       Last_sym = 0;
       if (Pass == 2)
           error ("symbol Undefined on pass 2");
-        return (NULL); 
+        return (NULL);
 }
 
 
@@ -115,35 +115,35 @@ struct nlist *lookup(char *name)
  */
 struct oper *mne_look(char *str)
 {
-	struct oper *low,*high,*mid;
-	int     cond;
+    struct oper *low,*high,*mid;
+    int     cond;
 
-	/* Search machine mnemonics first */
-	low =  &table[0];
-	high = &table[ NMNE-1 ];
-	while (low <= high){
-		mid = low + (high-low)/2;
-		if( ( cond = strcmp(str,mid->mnemonic)) < 0)
-			high = mid - 1;
-		else if (cond > 0)
-			low = mid + 1;
-		else
-			return(mid);
-	}
+    /* Search machine mnemonics first */
+    low =  &table[0];
+    high = &table[ NMNE-1 ];
+    while (low <= high){
+        mid = low + (high-low)/2;
+        if( ( cond = strcmp(str,mid->mnemonic)) < 0)
+            high = mid - 1;
+        else if (cond > 0)
+            low = mid + 1;
+        else
+            return(mid);
+    }
 
-	/* Check for pseudo ops */
-	low =  &pseudo[0];
-	high = &pseudo[ NPSE-1 ];
-	while (low <= high){
-		mid = low + (high-low)/2;
-		if( ( cond = strcmp(str,mid->mnemonic)) < 0)
-			high = mid - 1;
-		else if (cond > 0)
-			low = mid + 1;
-		else
-			return(mid);
-	}
+    /* Check for pseudo ops */
+    low =  &pseudo[0];
+    high = &pseudo[ NPSE-1 ];
+    while (low <= high){
+        mid = low + (high-low)/2;
+        if( ( cond = strcmp(str,mid->mnemonic)) < 0)
+            high = mid - 1;
+        else if (cond > 0)
+            low = mid + 1;
+        else
+            return(mid);
+    }
 
-	return(NULL);
+    return(NULL);
 }
 

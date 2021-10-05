@@ -68,7 +68,7 @@ struct nlist { /* basic symbol table entry */
         char    *name;
         int     def;
         struct nlist *Lnext ; /* left node of the tree leaf */
-        struct nlist *Rnext; /* right node of the tree leaf */ 
+        struct nlist *Rnext; /* right node of the tree leaf */
         struct link *L_list; /* pointer to linked list of line numbers */
 };
 

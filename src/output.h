@@ -1,5 +1,5 @@
 /*
-	output header file
+    output header file
 */
 
 #ifndef _OUTPUT_H_

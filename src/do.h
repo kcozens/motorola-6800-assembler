@@ -1,5 +1,5 @@
 /*
- *	MC6800/02 specific processing
+ *  MC6800/02 specific processing
  */
 
 #ifndef _DO_H_

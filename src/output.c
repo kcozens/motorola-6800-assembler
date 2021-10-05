@@ -19,7 +19,7 @@ void stable(struct nlist *ptr)
     }
 }
 /*
- *  cross  --  prints the cross reference table 
+ *  cross  --  prints the cross reference table
  */
 void cross(struct nlist *point)
 {
