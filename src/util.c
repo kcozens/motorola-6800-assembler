@@ -12,7 +12,7 @@
  */
 void fatal(char *str)
 {
-    printf("%s\n",str);
+    fprintf(stderr,"%s\n",str);
     exit(-1);
 }
 
@@ -23,9 +23,8 @@ void fatal(char *str)
 void error(char *str)
 {
     if(N_files > 1)
-        printf("%s,",Argv[Cfn]);
-    printf("%d: ",Line_num);
-    printf("%s\n",str);
+        fprintf(stderr,"%s,",Argv[Cfn]);
+    fprintf(stderr,"%d: %s\n",Line_num,str);
     Err_count++;
 }
 
@@ -36,9 +35,8 @@ void error(char *str)
 void warn(char *str)
 {
     if(N_files > 1)
-        printf("%s,",Argv[Cfn]);
-    printf("%d: ",Line_num);
-    printf("Warning --- %s\n",str);
+        fprintf(stderr,"%s,",Argv[Cfn]);
+    fprintf(stderr,"%d: Warning --- %s\n",Line_num,str);
 }
 
 /*
