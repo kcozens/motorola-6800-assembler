@@ -63,8 +63,13 @@ void do_pseudo(int op /* which op */)
     switch(op){
         case RMB:               /* reserve memory bytes */
             if( eval() ){
-                Pc +=  Result;
-                f_record();     /* flush out bytes */
+                /* If byte count is 0, word align memory block */
+                if (Result == 0)
+                    Result = Pc & 1;
+                if (Result > 0) {
+                    Pc +=  Result;
+                    f_record(); /* flush out bytes */
+                    }
                 }
             else
                 error("Undefined Operand during Pass One");
