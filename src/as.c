@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,17 +28,17 @@ int main(int argc, char *argv[])
     FILE    *fopen();
     int j = 0;
 
-	if(argc < 2 || *argv[1] == '-'){
-		printf("Usage: %s file [more_files] [- options]\n",argv[0]);
-		printf("where options is one or more (separated  by spaces) of:\n");
-		printf("  l   - Generate output listing (sent to stdout)\n");
-		printf("  nol - Do not generate output listing\n");
-		printf("  c   - Show instruction cycle counts in listing\n");
-		printf("  noc - Do not show instruction cycle counts in listing\n");
-		printf("  s   - Generate Motorola S19 file\n");
-		printf("  cre - Generate cross-reference table\n");
-		printf("\n");
-		printf("Example use: %s test.asm - l c\n", argv[0]);
+    if(argc < 2 || *argv[1] == '-'){
+        printf("Usage: %s file [more_files] [- options]\n",argv[0]);
+        printf("where options is one or more (separated  by spaces) of:\n");
+        printf("  l   - Generate output listing (sent to stdout)\n");
+        printf("  nol - Do not generate output listing\n");
+        printf("  c   - Show instruction cycle counts in listing\n");
+        printf("  noc - Do not show instruction cycle counts in listing\n");
+        printf("  s   - Generate Motorola S19 file\n");
+        printf("  cre - Generate cross-reference table\n");
+        printf("\n");
+        printf("Example use: %s test.asm - l c\n", argv[0]);
         exit(1);
         }
       Argv = argv;
@@ -187,7 +186,7 @@ int parse_line(void)
     register char *ptrfrm = Line;
     register char *ptrto = Label;
 
-	if( *ptrfrm == '*' || *ptrfrm == ';' || *ptrfrm == '\n' )
+    if( *ptrfrm == '*' || *ptrfrm == ';' || *ptrfrm == '\n' )
         return(0);  /* a comment line */
 
     while( delim(*ptrfrm)== NO )
@@ -197,21 +196,21 @@ int parse_line(void)
 
     ptrfrm = skip_white(ptrfrm);
 
-	/* Handle comment after a label or comment line */
-	/* where the comment did not start in column 1. */
-	if( *ptrfrm == '*' || *ptrfrm == ';' || *ptrfrm == '\n' )
-	{
-		*Op = EOS;
-		*Operand = EOS;
+    /* Handle comment after a label or comment line */
+    /* where the comment did not start in column 1. */
+    if( *ptrfrm == '*' || *ptrfrm == ';' || *ptrfrm == '\n' )
+    {
+        *Op = EOS;
+        *Operand = EOS;
 
-		if (*Label == EOS)
-			return(0);	/* a comment line */
+        if (*Label == EOS)
+            return(0);  /* a comment line */
 
-		return(1);		/* label only line */
-	}
+        return(1);      /* label only line */
+    }
 
     ptrto = Op;
-	while( delim(*ptrfrm) == NO )
+    while( delim(*ptrfrm) == NO )
         *ptrto++ = mapdn(*ptrfrm++);
     *ptrto = EOS;
 

@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,7 +14,7 @@
  */
 int install(char *str, int val)
 {
-        struct link *lp;
+    struct link  *lp;
     struct nlist *np,*p,*backp;
     struct nlist *lookup();
     int     i;

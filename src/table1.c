@@ -1,4 +1,3 @@
-
 #include "table.h"
 
 struct oper table[] = {
