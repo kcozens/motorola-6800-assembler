@@ -150,7 +150,11 @@ int get_term(void)
                 if(*Optr == EOS)
                         val = 0;
                 else
+                  {
                         val = *Optr++;
+                        if(*Optr=='\'') /* end of character literal? */
+                            *Optr++;
+                  }
                 }
         else if( alpha(*Optr) ){ /* a symbol */
                 tmp = hold;     /* collect symbol name */
